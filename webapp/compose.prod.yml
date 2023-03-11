@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  webapp:
+    image: webapp/prod
+    build:
+      context: .
+      dockerfile: prod.dockerfile
+    ports:
+      - "3010:3010"
+    environment:
+      NODE_ENV: production
