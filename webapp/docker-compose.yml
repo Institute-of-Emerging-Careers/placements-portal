@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  webapp:
+    build: .
+    ports:
+      - "3010:3010"
+    volumes:
+      - ./src:/app/src
