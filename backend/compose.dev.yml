@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  mariadb:
+    image: "mariadb:10.11.2"
+    restart: "always"
+    volumes: 
+      - maria-data:/var/lib/mysql
+    env_file:
+      - .env  
+  webapp:
+    image: backend/dev
+    build:
+      context: .
+      dockerfile: dev.dockerfile
+    ports:
+      - "3020:3020"
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - mariadb
+    environment:
+      NODE_ENV: development
+
+volumes:
+  maria-data:
