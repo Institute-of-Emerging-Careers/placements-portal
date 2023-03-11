@@ -7,7 +7,11 @@ services:
       - maria-data:/var/lib/mysql
     env_file:
       - .env  
-  webapp:
+    expose:
+      - 3306
+    networks:
+      - docker-service
+  backend:
     image: backend/dev
     build:
       context: .
@@ -20,6 +24,12 @@ services:
       - mariadb
     environment:
       NODE_ENV: development
+    networks:
+      - docker-service
+
+networks:
+  docker-service:
+    driver: bridge
 
 volumes:
   maria-data:

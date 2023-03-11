@@ -9,4 +9,4 @@ RUN yarn install
 # copy source code
 COPY . .
 
-CMD [ "npm", "start"]
+CMD [ "npm", "run", "dev"]
