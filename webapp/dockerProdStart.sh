@@ -1,2 +1,1 @@
-npm run build
-npm run start
+docker run -p 3010:3010 -t webapp/prod

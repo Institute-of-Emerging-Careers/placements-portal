@@ -9,4 +9,5 @@ RUN yarn install
 # copy source code
 COPY . .
 
-CMD ./dockerProdStart.sh
+RUN npm run build
+CMD ["npm", "run", "start"]
