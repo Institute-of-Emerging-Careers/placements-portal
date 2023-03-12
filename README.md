@@ -15,7 +15,7 @@ It is available for Linux, Mac, and Windows [here](https://docs.docker.com/engin
 ### Step 2: Clone git repository
 `git clone https://github.com/Institute-of-Emerging-Careers/placements-portal.git`
 ### Step 3: Frontend `webapp`
-The webapp is the frontend of the application writiten in NextJS-Typescript. Simply run the `dockerDevStart.sh` script **from inside the webapp directory**:
+The webapp is the frontend of the application written in NextJS-Typescript. Simply run the `dockerDevStart.sh` script **from inside the webapp directory**:
 ```
 cd webapp
 ./dockerDevStart.sh
@@ -30,12 +30,9 @@ Enter to the `backend` directory.
 ```
 cd backend
 ```
-Create a file named `.env` containing the following values:
+Create a file named `.env` containing the following connection URL:
 ```
-MYSQL_ROOT_PASSWORD: "password123"
-MYSQL_DATABASE: "placements_database"
-MYSQL_USERNAME: "root"
-MYSQL_HOST: "mariadb"
+MONGO_URI=<mognodb connection URI>
 ```
 Then, while inside the `backend` directory, run the `./dockerDevStart.sh` script. The first run will take time as the docker image of mariadb will also be fetched. Subsequent runs will be faster due to layering.
 
