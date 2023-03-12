@@ -13,9 +13,10 @@ RUN yarn build
 # Production image, copy all the files and run next
 FROM node:lts-alpine AS runner
 ENV NODE_ENV=production
-COPY --from=production-builder /app/next.config.js ./
-COPY --from=production-builder /app/public ./public
-COPY --from=production-builder /app/.next ./.next
-COPY --from=production-builder /app/node_modules ./node_modules
+COPY --from=production-builder /app/.next/standalone ./.next/standalone
+COPY --from=production-builder /app/.next/static ./.next/standalone/.next/static
+COPY --from=production-builder /app/public ./.next/standalone/public
+RUN chmod +x ./.next/standalone/server.js
 EXPOSE 3010
-CMD ["node_modules/.bin/next", "start"]
+ENV PORT=3010
+CMD ["node","./.next/standalone/server.js"]
