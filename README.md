@@ -51,7 +51,7 @@ Visit ```localhost:3020```. You should see `Hello World`. `nodemon` is running, 
 Mariadb is running inside its own docker container. You need to launch a shell inside the container to access the mariadb cli. Launch docker desktop to see a list of running containers:
 ![image](https://user-images.githubusercontent.com/34311857/224539640-27f1feda-0a6d-419e-8173-c17c07462288.png)
 `Backend` contains two containers currently, one running mariadb and the other running our code. We need to launch a shell inside the mariadb container. CLick on the `mariadb-1` container (it may be named differently on your system). You can see the logs of this container here. This is another advantage of using docker containers. The logs of mariadb and our app will not get mixed.
-![image](https://user-images.githubusercontent.com/34311857/224539852-d089ed81-0ef5-4a4f-86b9-0c2f88c1f94e.png)
+![image](https://user-images.githubusercontent.com/34311857/224540018-9e64cf68-37c9-4c8e-ba7a-1e6c8ca56a99.png)
 
 Go to the terminal tab and here you can run
 ```
