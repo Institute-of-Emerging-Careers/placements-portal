@@ -14,7 +14,7 @@ MariaDB | `v10.11.2`
 It is available for Linux, Mac, and Windows [here](https://docs.docker.com/engine/install/).
 ### Step 2: Clone git repository
 `git clone https://github.com/Institute-of-Emerging-Careers/placements-portal.git`
-### Step 3: webapp
+### Step 3: Starting the NextJS `webapp` in development mode
 The webapp is the frontend of the application writiten in NextJS-Typescript. Simply run the `dockerDevStart.sh` script **from inside the webapp directory**:
 ```
 cd webapp
