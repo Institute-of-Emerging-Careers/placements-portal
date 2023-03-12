@@ -65,4 +65,8 @@ SHOW DATABASES;
 ```
 If it does not exist, create it now. 
 
-**Important:** Once created, close the backend container group using Docker Desktop or by pressing `Ctrl+C` in the terminal where the shell script was running, and then start it again by running the `./dockerDevStart.sh` script. Now once again log into the mariadb cli and confirm that restarting the container did not wipe the database.
+##### Important
+- Once the database is created, also create a table inside the database. 
+- Now close the backend container group using Docker Desktop or by pressing `Ctrl+C` in the terminal where the shell script was running
+- Now start it again by running the `./dockerDevStart.sh` script. 
+- Now once again log into the mariadb cli and confirm that restarting the container did not wipe the database and table.
