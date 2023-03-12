@@ -14,3 +14,13 @@ MariaDB | `v10.11.2`
 It is available for Linux, Mac, and Windows [here](https://docs.docker.com/engine/install/).
 ### Step 2: Clone git repository
 `git clone https://github.com/Institute-of-Emerging-Careers/placements-portal.git`
+### Step 3: webapp
+The webapp is the frontend of the application writiten in NextJS-Typescript. Simply run the `dockerDevStart.sh` script **from inside the webapp directory**:
+```
+cd `webapp`
+./dockerDevStart.sh
+```
+The first run may be slow because an image will be built from the ground up, so be patient; subsequent runs will be very fast due to docker's layering.
+The frontend server will run on port `3010`. 
+#### Why use docker in development?
+This way all developers, those working on Mac as well as those working on Windows/Linux, will all be running their code in the same OS environment (Linux Alpine) even in development.
