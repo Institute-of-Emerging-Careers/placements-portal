@@ -17,7 +17,7 @@ It is available for Linux, Mac, and Windows [here](https://docs.docker.com/engin
 ### Step 3: webapp
 The webapp is the frontend of the application writiten in NextJS-Typescript. Simply run the `dockerDevStart.sh` script **from inside the webapp directory**:
 ```
-cd `webapp`
+cd webapp
 ./dockerDevStart.sh
 ```
 The first run may be slow because an image will be built from the ground up, so be patient; subsequent runs will be very fast due to docker's layering.
