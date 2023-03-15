@@ -5,7 +5,7 @@ export const LecAccountSchema = new Schema(
 		student: { type: Schema.Types.ObjectId, ref: "Student", required: true },
 
 		payments: [
-			{ type: Schema.Types.ObjectId, ref: "Payment", required: false },
+			{ type: Schema.Types.ObjectId, ref: "LecPayment", required: false },
 		],
 
 		pledgedAmount: { type: Number, required: true },

@@ -1,23 +1,38 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
-(() => __awaiter(void 0, void 0, void 0, function* () {
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const error_1 = require("../interfaces/error");
+const models_1 = require("./models/models");
+dotenv_1.default.config();
+const seed = true;
+(async () => {
     try {
-        yield mongoose.connect(process.env.NODE_ENV === "production"
+        await mongoose_1.default.connect(process.env.NODE_ENV === "production"
             ? process.env.MONGO_URI_PROD
             : process.env.MONGO_URI_DEV);
         console.log("Database is connected");
     }
     catch (error) {
-        console.log(error);
+        throw new error_1.MyError("Database connection failed", 500);
     }
-}))();
+})();
+if (seed) {
+    createAdmins();
+}
+async function createAdmins() {
+    models_1.Admin.create({
+        name: "Ommer",
+        email: "ommer.amer@gmail.com",
+        password: bcrypt_1.default.hashSync("adminpwd1", parseInt(process.env.SALT_ROUNDS) || 3),
+    });
+    models_1.Admin.create({
+        name: "Wahab",
+        email: "ommer.amer@gmail.com",
+        password: bcrypt_1.default.hashSync("adminpwd10", parseInt(process.env.SALT_ROUNDS) || 3),
+    });
+}

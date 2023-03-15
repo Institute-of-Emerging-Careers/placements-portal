@@ -1,12 +1,24 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import helmet from "helmet";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { errorHandler } from "./functions/errorHandler";
+import authRouter from "./routes/authRouter";
+
 dotenv.config();
 
 const app: Express = express();
 
-app.get("/", (req: Request, res: Response) => {
-	res.send("Hello World");
-});
+app.use(cookieParser());
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/auth", authRouter);
+
+app.use(errorHandler);
 
 app.listen(3020, () => {
 	console.log("Listening on port 3020");

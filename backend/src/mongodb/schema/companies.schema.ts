@@ -11,6 +11,13 @@ export const CompaniesSchema = new Schema(
 		pocTwo: { type: String, required: false },
 		status: { type: String, required: false },
 		notes: { type: String, required: false },
+
+		placements: [
+			{ type: Schema.Types.ObjectId, ref: "Placement", required: false },
+		],
+		personalPayments: [
+			{ type: Schema.Types.ObjectId, ref: "PersonalPayment", required: false },
+		],
 	},
 	{ timestamps: true }
 );
