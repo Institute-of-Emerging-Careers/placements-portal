@@ -1,9 +1,11 @@
 import express, { Router, Request, Response } from "express";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import ash from "express-async-handler";
-import { tokenPayload, login } from "../interfaces/auth";
+import { login } from "../interfaces/auth";
 import { MyError } from "../interfaces/error";
 import { Admin } from "../mongodb/models/models";
+import { generateToken } from "../functions/jwt";
 
 dotenv.config();
 
@@ -19,21 +21,38 @@ authRouter.get(
 authRouter.post(
 	"/login",
 	ash(async (req: Request, res: Response) => {
-
 		const creds: login = req.body;
 
-        const admin = await Admin.findOne({
-            where: {
-                email: creds.email
-            }
-        })
+		const admin = await Admin.findOne({ email: creds.email });
 
-        console.log(admin);
-        
+		if (admin) {
+			const valid = await bcrypt.compare(creds.password, admin.password);
 
-        res.sendStatus(200)
+			if (valid) {
+				const tokenPayload = {
+					id: admin._id,
+					email: admin.email,
+					name: admin.name,
+				};
 
-        
+				const token = await generateToken(tokenPayload);
+
+				res
+					.cookie("access_token", token, {
+						httpOnly: true,
+						secure: process.env.NODE_ENV === "production",
+					})
+					.status(200)
+					.json({ message: "Logged in successfully 😊 👌" });
+
+			} else {
+				throw new MyError("Incorrect username or password 🚨", 401);
+			}
+		} else {
+			throw new MyError("Invalid Credentials ❌", 401);
+		}
+
+		res.sendStatus(200);
 	})
 );
 

@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import ash from "express-async-handler";
 import { MyError } from "../interfaces/error";
-import { tokenPayload } from "../interfaces/auth";
 
-export const generateToken = (payload: any) => {
+
+export const generateToken = async (payload: any) => {
 	return jwt.sign(payload, process.env.JWT_SECRET as string, {
 		expiresIn: "1d",
 	});
@@ -20,7 +20,7 @@ export const checkAuthenticated = ash(
 
 		const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
 
-		const { role } = decoded as tokenPayload;
+		const { role } = decoded as any;
 
 		if (!decoded || role !== "admin") {
 			throw new MyError("Unauthorized", 401);

@@ -5,10 +5,13 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./functions/errorHandler";
 import authRouter from "./routes/authRouter";
+import { connect } from "./mongodb/database";
 
 dotenv.config();
 
 const app: Express = express();
+
+connect(); //connect to the database
 
 app.use(cookieParser());
 app.use(cors());

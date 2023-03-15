@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import { MyError } from "../interfaces/error";
 import { Admin } from "./models/models";
 
 dotenv.config();
 
-const seed = true;
+const seed = false;
 
-(async () => {
+export const connect = async () => {
 	try {
 		await mongoose.connect(
 			process.env.NODE_ENV === "production"
@@ -17,9 +16,10 @@ const seed = true;
 		);
 		console.log("Database is connected");
 	} catch (error) {
-		throw new MyError("Database connection failed", 500);
+		console.log("Database connection failed");
+		console.log("Error")
 	}
-})();
+};
 
 if (seed) {
 	createAdmins();
@@ -36,10 +36,14 @@ async function createAdmins() {
 	});
 	Admin.create({
 		name: "Wahab",
-		email: "ommer.amer@gmail.com",
+		email: "abdul6wahab6@gmail.com",
 		password: bcrypt.hashSync(
-			"adminpwd10",
+			"adminpwd2",
 			parseInt(process.env.SALT_ROUNDS as string) || 3
 		),
 	});
+
+
+	console.log("seeding done");
+	
 }

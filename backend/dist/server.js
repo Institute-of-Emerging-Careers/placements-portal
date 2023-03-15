@@ -10,8 +10,10 @@ const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const errorHandler_1 = require("./functions/errorHandler");
 const authRouter_1 = __importDefault(require("./routes/authRouter"));
+const database_1 = require("./mongodb/database");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+(0, database_1.connect)(); //connect to the database
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)());
 app.use((0, helmet_1.default)());
