@@ -37,14 +37,11 @@ authRouter.post(
 
 				const token = await generateToken(tokenPayload);
 
-				res
-					.cookie("access_token", token, {
-						httpOnly: true,
-						secure: process.env.NODE_ENV === "production",
-					})
-					.status(200)
-					.json({ message: "Logged in successfully 😊 👌" });
-
+				res.status(200).json({
+					token,
+					message: "Logged in successfully ✅",
+				});
+				
 			} else {
 				throw new MyError("Incorrect username or password 🚨", 401);
 			}

@@ -16,7 +16,7 @@ export const errorHandler = (
 		const stack = err.stack || "No stack trace available";
 
 		const response: ErrorMessage = {
-			msg: message,
+			message: message,
 		};
 
 		res.status(status).json(response);

@@ -1,5 +1,5 @@
 export interface ErrorMessage {
-	msg: string;
+	message: string;
 }
 //Used for error handling and logging
 export class MyError extends Error {

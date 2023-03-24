@@ -1,3 +1,9 @@
+import { Navbar } from "@/components/Navbar";
+
 export default function Home() {
-  return <h1>Home 3</h1>
+	return (
+		<div className="w-screen h-full">
+			<Navbar />
+		</div>
+	);
 }

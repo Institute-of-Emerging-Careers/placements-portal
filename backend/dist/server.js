@@ -19,7 +19,7 @@ app.use((0, cors_1.default)());
 app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use("/auth", authRouter_1.default);
+app.use("/api/auth", authRouter_1.default);
 app.use(errorHandler_1.errorHandler);
 app.listen(3020, () => {
     console.log("Listening on port 3020");
