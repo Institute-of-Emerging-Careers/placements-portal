@@ -1,5 +1,6 @@
 export interface ErrorMessage {
 	message: string;
+	success: boolean;
 }
 //Used for error handling and logging
 export class MyError extends Error {

@@ -40,6 +40,7 @@ authRouter.post(
 				res.status(200).json({
 					token,
 					message: "Logged in successfully ✅",
+					success: true,
 				});
 				
 			} else {
