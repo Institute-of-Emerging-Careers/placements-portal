@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 import { atom } from "jotai";
 
 export default function Login() {
@@ -43,7 +44,6 @@ export default function Login() {
 				setTimeout(() => {
 					router.push("/");
 				}, 1000);
-
 			} else {
 				setSuccessMsg("");
 				setErrorMsg(data.message);
@@ -57,10 +57,21 @@ export default function Login() {
 		<div className="flex flex-col h-screen bg-white text-black">
 			<Navbar />
 
-			<div className="flex flex-col h-full items-center justify-center text-black">
+			<div className="self-center items-center mt-16">
+				<p className="text-5xl font-bold">Login</p>
+			</div>
+
+			<div className="flex flex-col mt-32 self-center items-center text-black">
 				<form action="">
 					{successMsg && (
-						<div className="alert alert-success shadow-lg mb-3">
+						<motion.div 
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+						drag
+						dragConstraints={{ left: 0, right: 0, bottom: 0, top: 0 }}
+						initial={{ scale: 1.2, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						 className="alert alert-success shadow-lg mb-3">
 							<div>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -77,10 +88,18 @@ export default function Login() {
 								</svg>
 								<span>{successMsg}</span>
 							</div>
-						</div>
+						</motion.div>
 					)}
 					{errorMsg && (
-						<div className="alert alert-error shadow-lg mb-3">
+						<motion.div
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							drag
+							dragConstraints={{ left: 0, right: 0, bottom: 0, top: 0 }}
+							initial={{ scale: 1.2, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							className="alert alert-error shadow-lg mb-3"
+						>
 							<div>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +116,7 @@ export default function Login() {
 								</svg>
 								<span>{errorMsg}</span>
 							</div>
-						</div>
+						</motion.div>
 					)}
 					<div className="form-control border shadow-md p-4 rounded-lg">
 						<label className="label bg-blue">
