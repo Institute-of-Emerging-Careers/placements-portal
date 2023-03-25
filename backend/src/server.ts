@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./functions/errorHandler";
 import authRouter from "./routes/authRouter";
+import cohortRouter from "./routes/cohortRouter";
 import { connect } from "./mongodb/database";
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/api/auth", authRouter);
+app.use("/api/cohort", cohortRouter);
 
 app.use(errorHandler);
 
