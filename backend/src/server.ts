@@ -7,6 +7,7 @@ import { errorHandler } from "./functions/errorHandler";
 import authRouter from "./routes/authRouter";
 import cohortRouter from "./routes/cohortRouter";
 import { connect } from "./mongodb/database";
+import protect from "./functions/protect";
 
 dotenv.config();
 
@@ -20,9 +21,8 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 app.use("/api/auth", authRouter);
-app.use("/api/cohort", cohortRouter);
+app.use("/api/cohort", protect, cohortRouter);
 
 app.use(errorHandler);
 

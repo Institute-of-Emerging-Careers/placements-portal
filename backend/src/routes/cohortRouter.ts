@@ -8,12 +8,14 @@ const cohortRouter = express.Router();
 cohortRouter.post(
 	"/create",
 	ash(async (req, res) => {
-		const { cohortNumber, startDate, endDate }: createCohort = req.body;
 
+		const { cohortNumber, startDate, endDate }: createCohort = req.body;
+		console.log(cohortNumber, startDate, endDate);
+		
 		if (!cohortNumber || !startDate || !endDate) {
 			throw new Error("Please provide all the required fields 🚨");
 		}
-
+		
 		const cohort = await Cohort.create({
 			cohortNumber,
 			startDate,

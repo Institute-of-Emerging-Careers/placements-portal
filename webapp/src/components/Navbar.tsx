@@ -11,13 +11,13 @@ export const Navbar = () => {
 		if (token) {
 			setLoggedIn(true);
 		} else {
-			router.push("/login");
+			router.push("/");
 		}
 	}, []);
 
 	const handleLogout = () => {
 		localStorage.removeItem("token");
-		router.push("/login");
+		router.push("/");
 	};
 
 	return (
