@@ -11,6 +11,8 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const errorHandler_1 = require("./functions/errorHandler");
 const authRouter_1 = __importDefault(require("./routes/authRouter"));
 const cohortRouter_1 = __importDefault(require("./routes/cohortRouter"));
+const companyRouter_1 = __importDefault(require("./routes/companyRouter"));
+const studentRouter_1 = __importDefault(require("./routes/studentRouter"));
 const database_1 = require("./mongodb/database");
 const protect_1 = __importDefault(require("./functions/protect"));
 dotenv_1.default.config();
@@ -22,7 +24,9 @@ app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api/auth", authRouter_1.default);
+app.use("/api/student", protect_1.default, studentRouter_1.default);
 app.use("/api/cohort", protect_1.default, cohortRouter_1.default);
+app.use("/api/company", protect_1.default, companyRouter_1.default);
 app.use(errorHandler_1.errorHandler);
 app.listen(3020, () => {
     console.log("Listening on port 3020");

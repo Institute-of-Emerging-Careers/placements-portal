@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export const Navbar = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -10,6 +11,7 @@ export const Navbar = () => {
 		const token = localStorage.getItem("token");
 		if (token) {
 			setLoggedIn(true);
+			if (router.pathname === "/") router.push("/dashboard");
 		} else {
 			router.push("/");
 		}
@@ -35,28 +37,41 @@ export const Navbar = () => {
 			{/* only show nav and logout logos if the user is logged in */}
 			{loggedIn && (
 				<>
-					<ul className="basis-full flex md:space-x-32 p-2 text-xl justify-center items-center">
-						<li className="flex h-full items-center justify-center hover:scale-105 transition-all duration-150 cursor-pointer">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-6 w-6"
-								viewBox="0 0 512 512"
-							>
-								<path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z" />
-							</svg>
-							<p className="p-4">Dashboard</p>
-						</li>
+					<ul className="basis-full flex md:space-x-10 p-2 text-xl justify-center items-center">
+						<Link href="/dashboard">
+							<li className="flex h-full items-center justify-center hover:scale-105 transition-all duration-150 cursor-pointer">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									viewBox="0 0 512 512"
+								>
+									<path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z" />
+								</svg>
+								<p className="p-4">Dashboard</p>
+							</li>
+						</Link>
 
-						<li className="flex h-full items-center justify-center hover:scale-105 transition-all duration-150 cursor-pointer">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-6 w-6"
-								viewBox="0 0 640 512"
-							>
-								<path d="M211.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM32 256c0 17.7 14.3 32 32 32h85.6c10.1-39.4 38.6-71.5 75.8-86.6c-9.7-6-21.2-9.4-33.4-9.4H96c-35.3 0-64 28.7-64 64zm461.6 32H576c17.7 0 32-14.3 32-32c0-35.3-28.7-64-64-64H448c-11.7 0-22.7 3.1-32.1 8.6c38.1 14.8 67.4 47.3 77.7 87.4zM391.2 226.4c-6.9-1.6-14.2-2.4-21.6-2.4h-96c-8.5 0-16.7 1.1-24.5 3.1c-30.8 8.1-55.6 31.1-66.1 60.9c-3.5 10-5.5 20.8-5.5 32c0 17.7 14.3 32 32 32h224c17.7 0 32-14.3 32-32c0-11.2-1.9-22-5.5-32c-10.8-30.7-36.8-54.2-68.9-61.6zM563.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM321.6 192a80 80 0 1 0 0-160 80 80 0 1 0 0 160zM32 416c-17.7 0-32 14.3-32 32s14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z" />
-							</svg>
-							<p className="p-4">Students Sheet</p>
-						</li>
+						<Link href="/students">
+							<li className="flex h-full items-center justify-center hover:scale-105 transition-all duration-150 cursor-pointer">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									viewBox="0 0 640 512"
+								>
+									<path d="M211.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM32 256c0 17.7 14.3 32 32 32h85.6c10.1-39.4 38.6-71.5 75.8-86.6c-9.7-6-21.2-9.4-33.4-9.4H96c-35.3 0-64 28.7-64 64zm461.6 32H576c17.7 0 32-14.3 32-32c0-35.3-28.7-64-64-64H448c-11.7 0-22.7 3.1-32.1 8.6c38.1 14.8 67.4 47.3 77.7 87.4zM391.2 226.4c-6.9-1.6-14.2-2.4-21.6-2.4h-96c-8.5 0-16.7 1.1-24.5 3.1c-30.8 8.1-55.6 31.1-66.1 60.9c-3.5 10-5.5 20.8-5.5 32c0 17.7 14.3 32 32 32h224c17.7 0 32-14.3 32-32c0-11.2-1.9-22-5.5-32c-10.8-30.7-36.8-54.2-68.9-61.6zM563.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM321.6 192a80 80 0 1 0 0-160 80 80 0 1 0 0 160zM32 416c-17.7 0-32 14.3-32 32s14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z" />
+								</svg>
+								<p className="p-4">Students Sheet</p>
+							</li>
+						</Link>
+
+						<Link href="/new">
+							<li className="flex h-full items-center justify-center hover:scale-105 transition-all duration-150 cursor-pointer">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-6 w-6">
+									<path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+								</svg>
+								<p className="p-4">Data entry</p>
+							</li>
+						</Link>
 					</ul>
 
 					<div className="self-end justify-self-end flex items-center justify-center h-full hover:scale-105 transition-all duration-150">

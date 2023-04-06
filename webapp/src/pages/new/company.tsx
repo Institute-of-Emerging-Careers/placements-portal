@@ -8,15 +8,38 @@ export default function NewCompany() {
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		console.log(e.target.name.value);
-		console.log(e.target.linkedIn.value);
-		console.log(e.target.website.value);
-		console.log(e.target.poc1.value);
-		console.log(e.target.poc2.value);
-		console.log(e.target.verdict.value);
-		console.log(e.target.name.value);
-		console.log(e.target.name.value);
-		console.log(e.target.name.value);
+
+		try {
+			const response = await fetch("http://localhost:3020/api/company/create", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+				body: JSON.stringify({
+					name: e.target.name.value,
+					city: e.target.city.value,
+					website: e.target.website.value,
+					phone: e.target.phone.value,
+					linkedIn: e.target.linkedIn.value,
+					pocOne: e.target.pocOne.value,
+					pocTwo: e.target.pocTwo.value,
+					status: e.target.status.value,
+					notes: e.target.notes.value,
+				}),
+			});
+
+			if (response.status === 200) {
+				const data = await response.json();
+
+				setErrorMsg("");
+				setSuccessMsg(data.message);
+			} else {
+				setErrorMsg(response.statusText);
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	};
 	return (
 		<div className="h-screen w-screen bg-white text-lg text-black">
@@ -92,7 +115,7 @@ export default function NewCompany() {
 							</div>
 						</motion.div>
 					)}
-					
+
 					<div className="flex flex-col md:flex-row md:space-x-10">
 						<div className="flex flex-col">
 							<div className="form-control">
@@ -104,6 +127,7 @@ export default function NewCompany() {
 								<input
 									type="text"
 									name="name"
+									required
 									className="input text-black bg-white border border-gray-200 text-lg"
 								/>
 							</div>
@@ -125,7 +149,7 @@ export default function NewCompany() {
 								</label>
 								<input
 									type="number"
-									name="phoneNumber"
+									name="phone"
 									className="input text-black bg-white border border-gray-200 text-lg"
 								/>
 							</div>
@@ -141,18 +165,7 @@ export default function NewCompany() {
 									className="input text-black bg-white border border-gray-200 text-lg"
 								/>
 							</div>
-							<div className="form-control">
-								<label className="label ">
-									<span className="label-text text-black text-lg">
-										Contact:
-									</span>
-								</label>
-								<input
-									type="string"
-									name="contact"
-									className="input text-black bg-white border border-gray-200 text-lg"
-								/>
-							</div>
+
 							<div className="form-control">
 								<label className="label ">
 									<span className="label-text text-black text-lg">City:</span>
@@ -173,7 +186,7 @@ export default function NewCompany() {
 								</label>
 								<input
 									type="string"
-									name="poc1"
+									name="pocOne"
 									className="input text-black bg-white border border-gray-200 text-lg"
 								/>
 							</div>
@@ -185,7 +198,7 @@ export default function NewCompany() {
 								</label>
 								<input
 									type="string"
-									name="poc2"
+									name="pocTwo"
 									className="input text-black bg-white border border-gray-200 text-lg"
 								/>
 							</div>
@@ -200,16 +213,6 @@ export default function NewCompany() {
 									className="input text-black bg-white border border-gray-200 text-lg"
 								/>
 							</div>
-							<div className="form-control">
-								<label className="label ">
-									<span className="label-text text-black text-lg">Verdict</span>
-								</label>
-								<input
-									type="string"
-									name="verdict"
-									className="input text-black bg-white border border-gray-200 text-lg"
-								/>
-							</div>
 
 							<div className="form-control">
 								<label className="label ">
@@ -218,7 +221,7 @@ export default function NewCompany() {
 								<textarea
 									name="notes"
 									className="textarea bg-white text-lg border-gray-200 border"
-									rows = {4}
+									rows={4}
 								></textarea>
 							</div>
 						</div>

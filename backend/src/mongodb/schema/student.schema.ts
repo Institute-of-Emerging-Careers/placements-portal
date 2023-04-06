@@ -18,7 +18,7 @@ export const StudentSchema = new Schema(
 			type: String,
 			required: true,
 			enum: [
-				"L1: Placed(+50k)",
+				"L1: Placed (+50k)",
 				"L2: Placed (<50k)",
 				"L3: Placed(Unpaid)",
 				"L4: Unemployed",
