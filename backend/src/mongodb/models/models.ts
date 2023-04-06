@@ -1,0 +1,20 @@
+import mongoose from "mongoose";
+import { CohortSchema } from "../schema/cohort.schema";
+import { CompaniesSchema } from "../schema/companies.schema";
+import { LecAccountSchema } from "../schema/lecAccount.schema";
+import { LecPaymentsSchema } from "../schema/lecPayments.schema";
+import { PersonalPaymentsSchema } from "../schema/personalPayments.schema";
+import { PersonalAccountSchema } from "../schema/personalAccount.schema";
+import { StudentSchema } from "../schema/student.schema";
+import { PlacementsSchema } from "../schema/placements.schema";
+import { AdminSchema } from "../schema/admin.schema";
+
+export const Cohort = mongoose.model("Cohort", CohortSchema);
+export const Company = mongoose.model("Company", CompaniesSchema);
+export const LecAccount = mongoose.model("LecAccount", LecAccountSchema);
+export const LecPayment = mongoose.model("LecPayment", LecPaymentsSchema);
+export const PersonalPayment = mongoose.model("PersonalPayment", PersonalPaymentsSchema);
+export const PersonalAccount = mongoose.model("PersonalAccount", PersonalAccountSchema);
+export const Student = mongoose.model("Student", StudentSchema);
+export const Placement = mongoose.model("Placement", PlacementsSchema);
+export const Admin = mongoose.model("Admin", AdminSchema);
